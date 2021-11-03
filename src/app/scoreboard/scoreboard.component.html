@@ -1,0 +1,21 @@
+<div *ngIf="isOpen">
+  <div class="backdrop"></div>
+  <div class="scoreboard-box">
+    <div class="text-center">
+      <h2 class="uppercase">{{ userEmail }}</h2>
+      <h1 class="mt-20 text-2xl text-center font-bold">
+        Score : {{ scoreBoard.lastScore }} / {{ quizLength }}
+      </h1>
+      <p>
+        Merci d'avoir participé au quiz ! Vous avez terminé {{ scoreBoard.rank
+        }}{{ scoreBoard.rank === 1 ? "er" : "e" }}
+      </p>
+      <button class="btn-blue btn-lg mt-5" (click)="onRetry()">
+        Refaire ce quiz <i class="las la-redo-alt"></i>
+      </button>
+      <button class="btn-red btn-lg" (click)="onQuit()">
+        Quitter <i class="las la-sign-out-alt"></i>
+      </button>
+    </div>
+  </div>
+</div>

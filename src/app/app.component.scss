@@ -1,0 +1,9 @@
+.auth-image {
+  height: 50vh;
+}
+
+@screen md {
+  .auth-image {
+    height: 90vh;
+  }
+}

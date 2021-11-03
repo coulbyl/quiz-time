@@ -1,0 +1,14 @@
+.quiz-card {
+  @apply border px-4 py-2 bg-blue-500 shadow-md rounded-lg mb-2;
+  .card-question {
+    @apply text-white font-bold tracking-wide;
+  }
+  .card-response {
+    @apply text-gray-300 #{'!important'};
+  }
+}
+
+.form {
+  height: 70vh;
+  @apply overflow-y-auto;
+}
