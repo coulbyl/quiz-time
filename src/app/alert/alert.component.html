@@ -1,7 +1,3 @@
-<div
-  class="alert bg-{{ type }}-300 text-{{ type }}-500"
-  *ngIf="msg"
-  (click)="onClose()"
->
+<div class="alert bg-red-300 text-red-500" *ngIf="msg" (click)="onClose()">
   {{ msg }}
 </div>
