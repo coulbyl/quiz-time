@@ -4,10 +4,10 @@
 </div>
 <form #quizForm="ngForm" (ngSubmit)="onSubmit(quizForm)" *ngIf="!isLoading">
   <button class="btn-lg btn-green" [disabled]="!quizForm.form.valid">
-    Soumettre
+    Soumettre <i class="las la-paper-plane"></i>
   </button>
   <button class="btn-lg btn-gray" type="button" (click)="onClearForm(quizForm)">
-    Reprendre
+    Reprendre <i class="las la-redo-alt"></i>
   </button>
   <div class="grid md:grid-cols-2 mt-2 form">
     <div class="quiz-card block" *ngFor="let quiz of quizs">

@@ -12,7 +12,9 @@
     </div>
     <div class="items-center md:flex">
       <div class="flex flex-col md:flex-row mx-6" *ngIf="isAuthenticated">
-        <a class="NavItem" (click)="onLogout()">Se déconnecter</a>
+        <button class="btn-blue btn-md" (click)="onLogout()">
+          Se déconnecter
+        </button>
       </div>
     </div>
   </div>
