@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { getExpirationDate } from '../utils';
 import { AUTH_ERROR_MESSAGES } from './errors';
 import { User } from './user.model';
 
@@ -69,13 +68,17 @@ export class AuthService {
     }, timeout);
   }
 
+  private getExpirationDate(expiresIn: number): Date {
+    return new Date(new Date().getTime() + expiresIn * 1000);
+  }
+
   private makeAuthReq(url: string, body: RequestBodyPayload) {
     return this.http
       .post<ResponsePayload>(url, { ...body, returnSecureToken: true })
       .pipe(
         catchError(this.handleError),
         tap(({ email, localId, idToken, expiresIn }) => {
-          const tokenExpirationDate = getExpirationDate(+expiresIn);
+          const tokenExpirationDate = this.getExpirationDate(+expiresIn);
           const user = new User(email, localId, idToken, tokenExpirationDate);
           this.user.next(user);
           this.autoLogout(+expiresIn * 1000);

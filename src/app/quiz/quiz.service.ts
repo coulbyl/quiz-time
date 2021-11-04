@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ScoreBoard } from '../scoreboard/scoreboard.model';
-import { ranking } from '../utils';
 import { Quiz } from './quiz.model';
 @Injectable({
   providedIn: 'root',
@@ -222,10 +221,22 @@ export class QuizService {
     );
   }
 
+  private ranking(users: ScoreBoard[]) {
+    users.sort((a, b) => b.lastScore - a.lastScore);
+    let rank = 1;
+    for (var i = 0; i < users.length; i++) {
+      if (i > 0 && users[i].lastScore < users[i - 1].lastScore) {
+        rank++;
+      }
+      users[i].rank = rank;
+    }
+    return users;
+  }
+
   getScoreboard(email: string) {
     return this.fetchUsers.pipe(
       map((users) => {
-        return ranking(users).find((user) => user.email === email)!;
+        return this.ranking(users).find((user) => user.email === email)!;
       })
     );
   }
