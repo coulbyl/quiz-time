@@ -247,4 +247,12 @@ export class QuizService {
       lastScore,
     });
   }
+
+  storeToLS(key: string, value: any) {
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+  getFromLS(key: string, isObject = true) {
+    if (isObject) return JSON.parse(localStorage.getItem(key)!);
+    return localStorage.getItem(key);
+  }
 }

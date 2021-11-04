@@ -14,5 +14,7 @@ export class HeaderComponent implements OnInit {
 
   onLogout() {
     this.authService.logout();
+    localStorage.removeItem('userResponses');
+    localStorage.removeItem('currentPage');
   }
 }

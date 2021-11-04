@@ -3,14 +3,8 @@
   <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
 </div>
 <form #quizForm="ngForm" (ngSubmit)="onSubmit(quizForm)" *ngIf="!isLoading">
-  <button class="btn-lg btn-green" [disabled]="!quizForm.form.valid">
-    Soumettre <i class="las la-paper-plane"></i>
-  </button>
-  <button class="btn-lg btn-gray" type="button" (click)="onClearForm(quizForm)">
-    Reprendre <i class="las la-redo-alt"></i>
-  </button>
-  <div class="grid md:grid-cols-2 mt-2 form">
-    <div class="quiz-card block" *ngFor="let quiz of quizs">
+  <div class="mt-2">
+    <div class="quiz-card block" *ngFor="let quiz of quizs | paginate: config">
       <span class="card-question">{{ quiz.question }}</span>
       <div class="mt-2">
         <div *ngFor="let response of quiz.responses; let i = index">
@@ -28,5 +22,18 @@
         </div>
       </div>
     </div>
+  </div>
+  <pagination-template
+    #p="paginationApi"
+    [id]="config.id!"
+    (pageChange)="config.currentPage = $event"
+  >
+  </pagination-template>
+  <div class="py-2">{{ p.getCurrent() }}/{{ p.getTotalItems() }}</div>
+  <div class="text-center custom-pagination">
+    <button class="btn-lg btn-gray" [disabled]="!quizForm.form.valid">
+      Validez et passez à la question suivante
+      <i class="las la-paper-plane"></i>
+    </button>
   </div>
 </form>
