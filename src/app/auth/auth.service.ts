@@ -85,7 +85,7 @@ export class AuthService {
   }
 
   private handleError(err: HttpErrorResponse) {
-    let message = 'An unknown error occurred!';
+    let message = "Une erreur inconnue s'est produite !";
     for (const [key, value] of Object.entries(AUTH_ERROR_MESSAGES)) {
       switch (err.error?.error?.message) {
         case key:
