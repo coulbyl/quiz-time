@@ -44,7 +44,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     }
 
     this.subscription = this.auth$.subscribe(
-      (res) => {
+      () => {
         this.isLoading = false;
         this.router.navigate(['/quiz']);
       },
