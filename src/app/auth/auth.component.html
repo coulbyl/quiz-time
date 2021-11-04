@@ -28,10 +28,12 @@
     </div>
     <button class="btn-blue btn-lg" [disabled]="!authForm.form.valid">
       {{ isLoginMode ? "Connexion" : "Inscription" }}
+      <i class="las la-sign-in-alt"></i>
     </button>
     |
     <button class="btn-green btn-md" type="button" (click)="onSwitchMode()">
       Passer à {{ isLoginMode ? "l'inscription" : "la connexion" }}
+      <i class="las la-sign-in-alt"></i>
     </button>
   </form>
 </div>
