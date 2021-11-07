@@ -1,0 +1,11 @@
+.progress-bar-wrapper {
+  @apply border px-2 py-2 shadow-lg rounded-full flex justify-between absolute w-full;
+  @apply -top-10 z-50 left-0;
+  .progress {
+    width: 85%;
+    @apply h-3 bg-gray-300 border rounded-full mt-1;
+    div {
+      @apply h-3 bg-gradient-to-r from-blue-400  to-pink-500 border rounded-full;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+<div class="progress-bar-wrapper">
+  <div class="progress">
+    <div [style.width]="p.getCurrent() * pM + '%'"></div>
+  </div>
+  <div class="font-thin text-sm tracking-widest">
+    <i class="las la-crown text-yellow-500 mr-1"></i>{{ p.getCurrent() }}/{{
+      p.getTotalItems()
+    }}
+  </div>
+</div>

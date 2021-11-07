@@ -15,6 +15,9 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
 import { AlertComponent } from './alert/alert.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { QuizFormComponent } from './quiz/quiz-form/quiz-form.component';
+import { ProgressBarComponent } from './quiz/progress-bar/progress-bar.component';
+import { TimerComponent } from './quiz/timer/timer.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     HomeComponent,
     LoadingSpinnerComponent,
     AlertComponent,
+    QuizFormComponent,
+    ProgressBarComponent,
+    TimerComponent,
   ],
   imports: [
     BrowserModule,

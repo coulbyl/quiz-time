@@ -30,7 +30,7 @@ $sizes: (
   }
 }
 
-$colors: "red", "green", "blue", "gray";
+$colors: "red", "blue";
 
 @each $color in $colors {
   .btn-#{$color} {
@@ -41,7 +41,7 @@ $colors: "red", "green", "blue", "gray";
 
 .form-group {
   label {
-    @apply block mb-1 font-bold;
+    @apply block mb-1 font-light;
   }
   input,
   textarea {
@@ -52,4 +52,10 @@ $colors: "red", "green", "blue", "gray";
 textarea.ng-invalid.ng-touched,
 input.ng-invalid.ng-touched {
   @apply ring-1 ring-red-500;
+}
+
+.btn-gradient {
+  @apply text-sm text-white shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150;
+  @apply bg-gradient-to-r from-blue-400  to-pink-500 px-2 py-2 font-bold tracking-wider;
+  @apply active:from-blue-500 active:to-pink-600 rounded-lg disabled:cursor-not-allowed disabled:opacity-75;
 }

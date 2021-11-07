@@ -12,7 +12,7 @@ export class AppComponent {
   isAuthenticated = false;
   userEmail: string | undefined;
 
-  private subscription!: Subscription;
+  private subscription: Subscription;
 
   constructor(private authService: AuthService) {}
 

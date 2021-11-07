@@ -17,7 +17,8 @@ export class ScoreboardComponent implements OnInit, OnDestroy {
   isOpen = false;
   scoreBoard!: ScoreBoard;
 
-  private subscription!: Subscription;
+  private subscription: Subscription;
+  private quizSubscription: Subscription;
 
   constructor(
     private quizservice: QuizService,
@@ -26,7 +27,9 @@ export class ScoreboardComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.quizLength = this.quizservice.quizs.length;
+    this.quizSubscription = this.quizservice.quizs.subscribe(
+      (quizs) => (this.quizLength = quizs.length)
+    );
 
     this.subscription = merge(
       this.scoreboardService.open,
@@ -46,10 +49,11 @@ export class ScoreboardComponent implements OnInit, OnDestroy {
 
   onQuit() {
     this.scoreboardService.open.next(false);
-    this.router.navigate(['home']);
+    this.router.navigate(['/']);
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.quizSubscription.unsubscribe();
   }
 }

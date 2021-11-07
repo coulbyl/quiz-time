@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ScoreBoard } from '../scoreboard/scoreboard.model';
 import { computingQuiz } from './computing-quiz';
@@ -11,13 +11,13 @@ import { Quiz } from './quiz.model';
 export class QuizService {
   score = new Subject<number>();
   dbUrl = 'https://quiz-time-b0305-default-rtdb.firebaseio.com/';
-  quizs: Quiz[] = computingQuiz;
+  quizs = new BehaviorSubject<Quiz[]>(computingQuiz);
 
   constructor(private http: HttpClient) {}
 
-  calculateScore(value: any) {
+  calculateScore(value: any, quizs: Quiz[]) {
     let score = 0;
-    for (const quiz of this.quizs) {
+    for (const quiz of quizs) {
       if (value[quiz.name] === quiz.response) {
         score++;
       }

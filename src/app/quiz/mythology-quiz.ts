@@ -86,4 +86,42 @@ export const mythologyQuiz: Quiz[] = [
     ],
     response: "Thésée, l'amateur de femmes",
   },
+  {
+    name: 'q11',
+    question: 'Qui posa une énigme à Odipe ?',
+    responses: ['Jocaste', 'Cerbère', 'Le Sphinx'],
+    response: 'Le Sphinx',
+  },
+  {
+    name: 'q12',
+    question: 'Le surnom favori de HéphaÏstos chez ses copains divins était',
+    responses: ['Le mari trompé', 'Le boîteux', 'Le rouquin'],
+    response: 'Le boîteux',
+  },
+  {
+    name: 'q13',
+    question: 'Après 10 ans de voyage, Ulysse retrouve :',
+    responses: ['Ithaque', 'Rome', 'Troie'],
+    response: 'Ithaque',
+  },
+  {
+    name: 'q14',
+    question: 'Héra, dite Junon à Rome, épouse du "Roi des Dieux"',
+    responses: [
+      'nourrit son enfant au sein',
+      "n'aime que les vaches",
+      'est surnommée la déesse "aux bras blancs"',
+    ],
+    response: 'est surnommée la déesse "aux bras blancs"',
+  },
+  {
+    name: 'q15',
+    question: 'Quel exploit Thésée a-t-il accompli ?',
+    responses: [
+      'Revenir des enfers',
+      'Prendre la place de Zeus',
+      'Tuer le Minotaure',
+    ],
+    response: 'Tuer le Minotaure',
+  },
 ];

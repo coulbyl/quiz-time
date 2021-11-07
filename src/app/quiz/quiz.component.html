@@ -5,60 +5,26 @@
   (pageChange)="config.currentPage = $event"
 >
 </pagination-template>
+
 <div class="relative z-0 max-w-xl mx-auto px-4 py-4 mt-5">
-  <div class="absolute" style="left: -10rem">
-    <h2 class="font-thin mb-1">Rubriques:</h2>
-    <button class="btn-xs btn-blue block opacity-75 quiz-rubric-active">
-      Informatique
+  <div class="quiz-rubric-wrapper">
+    <app-timer></app-timer>
+    <h2 class="font-thin mb-1 mt-2">Rubriques:</h2>
+    <button
+      *ngFor="let rubric of quizRubrics"
+      class="btn-xs btn-blue md:block opacity-75"
+      [class.quiz-rubric-active]="rubric === activeRubric"
+      (click)="onRubricChange(rubric, p)"
+    >
+      {{ rubric }}
     </button>
-    <button class="btn-xs btn-blue block opacity-75">Litérature</button>
-    <button class="btn-xs btn-blue block opacity-75">Anglais</button>
-    <button class="btn-xs btn-blue block opacity-75">Mythologie</button>
   </div>
-  <div class="text-center">
-    <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
-  </div>
-  <div class="progress-bar-wrapper">
-    <div class="progress">
-      <div [style.width]="p.getCurrent() * 5 + '%'"></div>
-    </div>
-    <div class="font-thin text-sm tracking-widest">
-      <i class="las la-crown text-yellow-500 mr-1"></i>{{ p.getCurrent() }}/{{
-        p.getTotalItems()
-      }}
-    </div>
-  </div>
-  <form #quizForm="ngForm" (ngSubmit)="onSubmit(quizForm)" *ngIf="!isLoading">
-    <div style="height: 400px">
-      <div class="block" *ngFor="let quiz of quizs | paginate: config">
-        <div @fadeAnimation *ngIf="quiz">
-          <h1 class="question">{{ quiz.question }}?</h1>
-          <div class="mt-2">
-            <div *ngFor="let response of quiz.responses; let i = index">
-              <label
-                class="inline-flex items-center quiz-responses"
-                [class.active-response]="input.checked"
-              >
-                <input
-                  type="radio"
-                  class="form-radio"
-                  ngModel
-                  name="{{ quiz.name }}"
-                  [value]="response"
-                  required
-                  #input
-                />
-                <span class="response-label">{{ response }}</span>
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="text-center custom-pagination">
-      <button class="validator" [disabled]="!quizForm.form.valid">
-        Valider
-      </button>
-    </div>
-  </form>
+
+  <app-progress-bar [p]="p" [pM]="100 / quizs.length"></app-progress-bar>
+  <app-quiz-form
+    [questions]="quizs"
+    [user]="user"
+    [config]="config"
+    [pApi]="p"
+  ></app-quiz-form>
 </div>

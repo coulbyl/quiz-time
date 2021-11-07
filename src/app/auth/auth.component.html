@@ -1,4 +1,4 @@
-<div>
+<div class="auth-wrapper">
   <div class="text-center">
     <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
   </div>
@@ -26,12 +26,12 @@
         minlength="6"
       />
     </div>
-    <button class="btn-blue btn-lg" [disabled]="!authForm.form.valid">
+    <button class="btn-gradient mt-4" [disabled]="!authForm.form.valid">
       {{ isLoginMode ? "Connexion" : "Inscription" }}
       <i class="las la-sign-in-alt"></i>
     </button>
     |
-    <button class="btn-green btn-md" type="button" (click)="onSwitchMode()">
+    <button class="btn-gradient" type="button" (click)="onSwitchMode()">
       {{ isLoginMode ? "S'inscrire ?" : "Se connecter ?" }}
     </button>
   </form>

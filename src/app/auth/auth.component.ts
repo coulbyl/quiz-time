@@ -46,10 +46,10 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.subscription = this.auth$.subscribe(
       () => {
         this.isLoading = false;
-        this.router.navigate(['/quiz']);
+        this.router.navigate(['/']);
       },
       (errorMsg) => {
-        this.alertService.state.next({ type: 'red', msg: errorMsg });
+        this.alertService.state.next(errorMsg);
         this.isLoading = false;
       }
     );

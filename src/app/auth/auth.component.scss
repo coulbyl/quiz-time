@@ -1,0 +1,9 @@
+.auth-wrapper {
+  margin-top: 10%;
+}
+
+@screen md {
+  .auth-wrapper {
+    margin-top: 35%;
+  }
+}
