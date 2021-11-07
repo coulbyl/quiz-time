@@ -1,39 +1,64 @@
 <app-scoreboard [userEmail]="user!.email"></app-scoreboard>
-<div class="text-center">
-  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
-</div>
-<form #quizForm="ngForm" (ngSubmit)="onSubmit(quizForm)" *ngIf="!isLoading">
-  <div class="mt-2">
-    <div class="quiz-card block" *ngFor="let quiz of quizs | paginate: config">
-      <span class="card-question">{{ quiz.question }}</span>
-      <div class="mt-2">
-        <div *ngFor="let response of quiz.responses; let i = index">
-          <label class="inline-flex items-center">
-            <input
-              type="radio"
-              class="form-radio"
-              ngModel
-              name="{{ quiz.name }}"
-              [value]="response"
-              required
-            />
-            <span class="ml-2 card-response">{{ response }}</span>
-          </label>
+<pagination-template
+  #p="paginationApi"
+  [id]="config.id!"
+  (pageChange)="config.currentPage = $event"
+>
+</pagination-template>
+<div class="relative z-0 max-w-xl mx-auto px-4 py-4 mt-5">
+  <div class="absolute" style="left: -10rem">
+    <h2 class="font-thin mb-1">Rubriques:</h2>
+    <button class="btn-xs btn-blue block opacity-75 quiz-rubric-active">
+      Informatique
+    </button>
+    <button class="btn-xs btn-blue block opacity-75">Litérature</button>
+    <button class="btn-xs btn-blue block opacity-75">Anglais</button>
+    <button class="btn-xs btn-blue block opacity-75">Mythologie</button>
+  </div>
+  <div class="text-center">
+    <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+  </div>
+  <div class="progress-bar-wrapper">
+    <div class="progress">
+      <div [style.width]="p.getCurrent() * 5 + '%'"></div>
+    </div>
+    <div class="font-thin text-sm tracking-widest">
+      <i class="las la-crown text-yellow-500 mr-1"></i>{{ p.getCurrent() }}/{{
+        p.getTotalItems()
+      }}
+    </div>
+  </div>
+  <form #quizForm="ngForm" (ngSubmit)="onSubmit(quizForm)" *ngIf="!isLoading">
+    <div style="height: 400px">
+      <div class="block" *ngFor="let quiz of quizs | paginate: config">
+        <div @fadeAnimation *ngIf="quiz">
+          <h1 class="question">{{ quiz.question }}?</h1>
+          <div class="mt-2">
+            <div *ngFor="let response of quiz.responses; let i = index">
+              <label
+                class="inline-flex items-center quiz-responses"
+                [class.active-response]="input.checked"
+              >
+                <input
+                  type="radio"
+                  class="form-radio"
+                  ngModel
+                  name="{{ quiz.name }}"
+                  [value]="response"
+                  required
+                  #input
+                />
+                <span class="response-label">{{ response }}</span>
+              </label>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <pagination-template
-    #p="paginationApi"
-    [id]="config.id!"
-    (pageChange)="config.currentPage = $event"
-  >
-  </pagination-template>
-  <div class="py-2">{{ p.getCurrent() }}/{{ p.getTotalItems() }}</div>
-  <div class="text-center custom-pagination">
-    <button class="btn-lg btn-gray" [disabled]="!quizForm.form.valid">
-      Validez et passez à la question suivante
-      <i class="las la-paper-plane"></i>
-    </button>
-  </div>
-</form>
+    <div class="text-center custom-pagination">
+      <button class="validator" [disabled]="!quizForm.form.valid">
+        Valider
+      </button>
+    </div>
+  </form>
+</div>

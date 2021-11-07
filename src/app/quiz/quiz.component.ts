@@ -15,11 +15,13 @@ import { ScoreboardService } from '../scoreboard/scoreboard.service';
 import { Quiz } from './quiz.model';
 import { QuizService } from './quiz.service';
 import { PaginationControlsDirective } from 'ngx-pagination';
+import { fadeAnimation } from '../animations';
 
 @Component({
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.scss'],
+  animations: [fadeAnimation],
 })
 export class QuizComponent implements OnInit, OnDestroy, AfterViewInit {
   quizs: Quiz[] = [];
