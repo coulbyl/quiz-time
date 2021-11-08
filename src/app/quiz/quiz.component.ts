@@ -31,6 +31,7 @@ export class QuizComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.handleRubricCases(this.quizService.getFromLS('rubric'));
     this.quizSubscription = this.quizService.quizs.subscribe(
       (quizs) => (this.quizs = quizs)
     );
@@ -40,23 +41,30 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
 
   onRubricChange(rubric: string, p: PaginationControlsDirective) {
+    this.handleRubricCases(rubric);
+    p.setCurrent(1);
+    localStorage.removeItem('userResponses');
+    localStorage.removeItem('currentPage');
+  }
+
+  private handleRubricCases(rubric: string) {
     switch (rubric) {
       case 'Anglais':
         this.quizService.quizs.next(englishQuiz);
         this.activeRubric = rubric;
+        this.quizService.storeToLS('rubric', rubric);
         break;
       case 'Mythologie':
         this.quizService.quizs.next(mythologyQuiz);
         this.activeRubric = rubric;
+        this.quizService.storeToLS('rubric', rubric);
         break;
       default:
         this.quizService.quizs.next(computingQuiz);
         this.activeRubric = 'Informatique';
+        this.quizService.storeToLS('rubric', rubric);
         break;
     }
-    p.setCurrent(1);
-    localStorage.removeItem('userResponses');
-    localStorage.removeItem('currentPage');
   }
 
   ngOnDestroy() {

@@ -14,7 +14,7 @@ import {
 })
 export class TimerComponent implements OnInit, OnDestroy {
   destroy$: Subject<void> = new Subject();
-  hour$: Observable<number>;
+  hour$: Observable<number | string>;
   min$: Observable<number>;
   sec$: Observable<number>;
 
@@ -28,7 +28,9 @@ export class TimerComponent implements OnInit, OnDestroy {
     );
 
     this.hour$ = date$.pipe(
-      map((date) => date.getHours()),
+      map((date) =>
+        date.getHours() < 10 ? '0' + date.getHours() : date.getHours()
+      ),
       distinctUntilChanged()
     );
     this.min$ = date$.pipe(
